@@ -34,7 +34,7 @@ public class ReportCardServiceImpl implements ReportCardService
 	}
 
 	@Override
-	public List<Users> getSingleReport(String userid)
+	public List<Object[]> getSingleReport(Integer  userid)
 	{
 		// TODO Auto-generated method stub
 		return rRepo.getSingleReport(userid);

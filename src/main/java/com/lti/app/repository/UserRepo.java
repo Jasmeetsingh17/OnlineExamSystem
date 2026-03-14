@@ -15,7 +15,6 @@ public class UserRepo implements UserRepo1 {
 	EntityManager eMan;
 	@Override
 	public void addUser(Users user) {
-		// TODO Auto-generated method stub
 		eMan.persist(user);
 	}
 

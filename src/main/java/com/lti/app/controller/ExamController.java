@@ -67,8 +67,8 @@ public class ExamController {
 	}
 
 	@GetMapping("/singlereportcard/{userid}")
-	public List<Users> getSingleReport(@PathVariable(name = "userid") String userid) {
-		return rService.getSingleReport(userid);
+	public List<Object[]> getSingleReport(@PathVariable Integer  userid) {
+	    return rService.getSingleReport(userid);
 	}
 
 	@Autowired
@@ -77,8 +77,10 @@ public class ExamController {
 	@PostMapping("/users")
 	public boolean addUser(@RequestBody Users user) {
 		uservice.addUser(user);
+		service.sendSuccessMail(user);
 		return true;
 	}
+
 
 	@Autowired
 	UserServiceLogin us;
@@ -91,11 +93,16 @@ public class ExamController {
 	@Autowired
 	private AddQuestionFileService qs;
 
-	@PostMapping(value = "/uploadcsv")
-	public void postImage(@RequestParam("file") MultipartFile file) {
+	@PostMapping("/uploadcsv")
+	public String uploadCsv(@RequestParam("file") MultipartFile file) {
 
-		String fileName = file.getOriginalFilename();
-		qs.saveQuestions(fileName);
+	    if (file.isEmpty()) {
+	        return "File is empty!";
+	    }
+
+	    qs.saveQuestions(file);
+
+	    return "CSV Uploaded Successfully!";
 	}
 
 	@Autowired
@@ -163,10 +170,10 @@ public class ExamController {
 		return "Please sign up";
 	}
 
-//	@RequestMapping("/registersuccess")
-//	public String successMail() {
-//		Users u = new Users;
-//		service.sendSuccessMail();
-//		return "Thank you for registering";
-//	}
+	@RequestMapping("/registersuccess")
+	public String successMail() {
+		Users u = new Users();
+		service.sendSuccessMail(u);
+		return "Thank you for registering";
+	}
 }

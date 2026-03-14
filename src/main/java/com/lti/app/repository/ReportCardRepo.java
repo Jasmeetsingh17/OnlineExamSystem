@@ -9,5 +9,5 @@ public interface ReportCardRepo
 {
 	public List<Users> getReportcard(String rid);
 	public boolean addReportCard(Reportcard rep);
-	public List<Users> getSingleReport(String userid);
+	public List<Object[]> getSingleReport(Integer  userid);
 }

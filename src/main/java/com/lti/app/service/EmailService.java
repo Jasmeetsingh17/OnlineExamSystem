@@ -17,7 +17,7 @@ public class EmailService {
 
 		SimpleMailMessage message = new SimpleMailMessage();
 
-		message.setFrom("dinishjesudass456@gmail.com");
+		message.setFrom("gurleenarora011@gmail.com");
 		message.setTo(toEmail);
 		message.setText(body);
 		message.setSubject(subject);
@@ -29,14 +29,21 @@ public class EmailService {
 
 	public void sendSuccessMail(Users user) {
 
-		SimpleMailMessage message = new SimpleMailMessage();
-		message.setTo(user.getEmail());
-		message.setFrom("dinishjesudass456@gmail.com");
-		message.setSubject("Registration Successful");
-		message.setText("Your registration is successful");
+	    SimpleMailMessage message = new SimpleMailMessage();
+	    message.setTo(user.getEmail());
+	    message.setFrom("gurleenarora011@gmail.com");
+	    message.setSubject("Registration Successful");
 
-		javaMailSender.send(message);
-		System.out.println("Sent");
+	    message.setText(
+	        "Dear " + user.getFullname() + ",\n\n" +
+	        "Your registration is successful.\n\n" +
+	        "Your User ID is: " + user.getUserid() + "\n\n" +
+	        "Please keep this ID for future login.\n\n" +
+	        "Regards,\nExam Portal Team"
+	    );
+
+	    javaMailSender.send(message);
+	    System.out.println("Sent");
 	}
 
 }
